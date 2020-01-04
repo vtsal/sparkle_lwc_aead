@@ -1,0 +1,60 @@
+Sparkle: Schwaemm and Esch -- Variants
+
+v1: Schwaemm256128 (AEAD only)
+
+    Reference Software:     
+        schwaemm256128v1
+
+    Values for generics and constants: 
+        set_selector : dummy_lwc_32
+    
+    Key Setup Time: 
+        0 clock cycles
+
+    Execution Time for Encryption:
+        Total:                      43*Na + 52*Nm + 114
+    	No AD:                      52*Nm + 94
+    	No DAT:                     43*Na + 94
+    	No AD & No DAT:             74
+    	No new key:                 {All formulas above, subtract 7 clock cycles}
+
+    Execution Time for Decryption:
+        Total:                      43*Na + 52*Nm + 115
+    	No AD:                      52*Nm + 95
+    	No DAT:                     43*Na + 95
+    	No AD & No DAT:             75
+    	No new key:                 {All formulas above, subtract 7 clock cycles}
+
+    **Please see clk_cycles.txt for further information on execution time
+
+v2: Schwaemm256128 and Esch256 (AEAD + HASH)
+
+    Reference Software:     
+        schwaemm256128v1
+        esch256v1
+
+    Values for generics and constants: 
+        set_selector : dummy_lwc_32
+    
+    Key Setup Time: 
+        0 clock cycles
+
+    Execution Time for Encryption:
+        Total:                      43*Na + 52*Nm + 114
+    	No AD:                      52*Nm + 94
+    	No DAT:                     43*Na + 94
+    	No AD & No DAT:             74
+    	No new key:                 {All formulas above, subtract 7 clock cycles}
+
+    Execution Time for Decryption:
+        Total:                      43*Na + 52*Nm + 115
+    	No AD:                      52*Nm + 95
+    	No DAT:                     43*Na + 95
+    	No AD & No DAT:             75
+    	No new key:                 {All formulas above, subtract 7 clock cycles}        
+    
+    Execution Time for Hash: 
+        39*H + 63
+
+    **Please see clk_cycles.txt for further information on execution time
+

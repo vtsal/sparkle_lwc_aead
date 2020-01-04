@@ -1,0 +1,36 @@
+Sparkle: Schwaemm and Esch -- Assumptions
+
+Hardware Description Language: VHDL
+Type of Implementation: Lightweight
+Use of LWC Package Files:
+
+    File:                           Used:       Release:        Modified:
+    data_piso.vhd                   Y           v1.0            N
+    data_sipo.vhd                   Y           v1.0            N
+    fwft_fifo.vhd                   Y           v1.0            N
+    key_piso.vhd                    Y           v1.0            N
+    LWC_TB.vhd                      Y           v1.0            N
+    LWC.vhd                         Y           v1.0            N
+    NIST_LWAPI_pkg.vhd              Y           v1.0            N
+    PostProcessor.vhd               Y           v1.0            N
+    PreProcessor.vhd                Y           v1.0            N
+    std_logic_1164_additions.vhd    N           v1.0            N
+    StepDownCountLd.vhd             Y           v1.0            N
+    design_pkg.vhd                  Y           v1.0            Y
+
+Supported segment types: npub, nsec, ensec, ad, data, tag, hash
+Order of segment types:
+
+    Encryption input:   nsec, npub, ad, data
+    Encryption output:  data, tag
+    Decryption input:   ensec, npub, ad, data, tag
+    Decryption output:  data, tag
+    Hash input:         data
+    Hash output:        hash
+
+Deviations from LWC Hardware API:
+
+    Minimum compliance criteria:        N/A
+    Interface:                          N/A
+    Communication Protocol:             N/A
+    Timing Characteristics:             N/A

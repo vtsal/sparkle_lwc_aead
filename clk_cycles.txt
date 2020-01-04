@@ -1,0 +1,71 @@
+Sparkle -- Schwaemm256128 and Esch256 : Clock Cycles in LWC
+
+Na       = # blocks associated data   ( |block| = 256 bits )
+Nm       = # blocks pt/ct data        ( |block| = 256 bits )
+Nh       = # blocks hash data         ( |block| = 128 bits )
+LbWords  = # words in last data block
+
+Encryption:
+
+    Load key:                   4
+    Wait npub:                  3
+    Load npub:                  8
+    Initialize state:           55
+    Load ad:                    8*Na
+    Process ad:                 35*(Na - 1) + 55
+    Load dat:                   9*Nm
+    Process dat:                35*(Nm - 1) + 55
+    Output dat:                 8*Nm
+    Output tag:                 4
+
+    Total:                      43*Na + 52*Nm + 114
+    No AD:                      52*Nm + 94
+    No DAT:                     43*Na + 94
+    No AD & No DAT:             74
+    No new key:                 {All formulas above, subtract 7 clock cycles}
+    
+    **Note, for a data input in which the last block is not a full block
+    (Length is less than 256 bits) the total number of clock cycles will 
+    decrease because fewer clock cycles are required for the output of 
+    the last block.
+    
+    Revised Total Formula:      43*Na + 52*Nm + 106 + LbWords
+    No AD:                      52*Nm + 86 + LbWords
+
+Decryption:
+
+    Load key:                   4
+    Wait npub:                  3
+    Load npub:                  8
+    Initialize state:           55
+    Load ad:                    8*Na
+    Process ad:                 35*(Na - 1) + 55
+    Load dat:                   9*Nm
+    Process dat:                35*(Nm - 1) + 55
+    Output dat:                 8*Nm
+    Load tag:                   4
+    Output tag valid:           1
+    
+    Total:                      43*Na + 52*Nm + 115
+    No AD:                      52*Nm + 95
+    No DAT:                     43*Na + 95
+    No AD & No DAT:             75
+    No new key:                 {All formulas above, subtract 7 clock cycles}
+    
+    **Note, for a data input in which the last block is not a full block
+    (Length is less than 256 bits) the total number of clock cycles will 
+    decrease because fewer clock cycles are required for the output of 
+    the last block.
+    
+    Revised Total: 		43*Na + 52*Nm + 106 + LbWords
+    Revised No AD:              52*Nm + 86 + LbWords  
+    
+Hash:
+
+    Load hash:                  4*Nh
+    Process hash:               35*(Nh - 1) + 55
+    Finalize hash:              35
+    Output hash:                8
+    
+    Total:                      39*Nh + 63
+    
